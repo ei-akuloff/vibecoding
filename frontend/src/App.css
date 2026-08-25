@@ -1,0 +1,200 @@
+:root {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #1f2937;
+  background-color: #f4f6f9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.app-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+  display: grid;
+  gap: 18px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.header p {
+  margin: 8px 0 0;
+  color: #4b5563;
+}
+
+.metrics-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.metric-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 18px;
+}
+
+.metric-card h2 {
+  margin: 0;
+  font-size: 1rem;
+  color: #374151;
+}
+
+.metric-value {
+  margin: 12px 0 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 18px;
+}
+
+.card h2 {
+  margin-top: 0;
+}
+
+.subscription-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.subscription-form label {
+  display: grid;
+  gap: 6px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.subscription-form input,
+.subscription-form select,
+.subscription-form button {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+}
+
+.subscription-form button {
+  background: #1d4ed8;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  align-self: end;
+}
+
+.subscription-form button:disabled {
+  opacity: 0.65;
+  cursor: default;
+}
+
+.error-message,
+.error-banner {
+  margin: 0;
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.subscriptions-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.subscriptions-table th,
+.subscriptions-table td {
+  border-bottom: 1px solid #e5e7eb;
+  padding: 12px 10px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.subscriptions-table th {
+  color: #374151;
+  font-size: 0.9rem;
+}
+
+.service-name {
+  display: inline-block;
+  margin-right: 8px;
+  font-weight: 600;
+}
+
+.renewing-badge {
+  display: inline-block;
+  background: #f59e0b;
+  color: #111827;
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.days-text {
+  margin-top: 4px;
+  color: #6b7280;
+  font-size: 0.8rem;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.toggle-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.toggle-btn.active {
+  background: #065f46;
+}
+
+.toggle-btn.paused {
+  background: #475569;
+}
+
+.toggle-btn:disabled {
+  opacity: 0.65;
+  cursor: default;
+}
+
+.row-paused {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.empty-state {
+  text-align: center;
+  color: #6b7280;
+}
+
+@media (max-width: 900px) {
+  .metrics-row {
+    grid-template-columns: 1fr;
+  }
+
+  .subscription-form {
+    grid-template-columns: 1fr;
+  }
+}
