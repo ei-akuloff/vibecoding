@@ -125,7 +125,7 @@ function App() {
       {error ? <p className="error-banner">{error}</p> : null}
 
       {isLoading ? (
-        <section className="card">Loading subscriptions...</section>
+        <div className="loading-card">Loading subscriptions…</div>
       ) : (
         <SubscriptionTable
           subscriptions={subscriptions}

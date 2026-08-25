@@ -7,12 +7,16 @@ function MetricsRow({ metrics }) {
   return (
     <section className="metrics-row">
       <article className="metric-card">
-        <h2>Total Monthly Burn Rate</h2>
-        <p className="metric-value">Rs {monthlyBurn.toFixed(2)}</p>
+        <p className="metric-label">Monthly Burn Rate</p>
+        <p className="metric-title">Total Recurring Spend</p>
+        <p className="metric-value">₹{monthlyBurn.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+        <p className="metric-sub">Active subscriptions only · normalized to monthly</p>
       </article>
-      <article className="metric-card">
-        <h2>Upcoming Renewals Alert Count</h2>
+      <article className="metric-card metric-card--alert">
+        <p className="metric-label">Renewals Alert</p>
+        <p className="metric-title">Upcoming Renewals</p>
         <p className="metric-value">{alerts}</p>
+        <p className="metric-sub">Renewing within the next 7 days</p>
       </article>
     </section>
   );

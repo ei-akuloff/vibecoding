@@ -1,5 +1,6 @@
 import { useState } from "react";
 import React from "react";
+
 const INITIAL_FORM = {
   service_name: "",
   cost: "",
@@ -17,31 +18,18 @@ function SubscriptionForm({ onAddSubscription, isSubmitting }) {
   }
 
   function validate() {
-    if (!form.service_name.trim()) {
-      return "Service name is required.";
-    }
-    if (!form.cost || Number(form.cost) <= 0) {
-      return "Cost must be greater than 0.";
-    }
-    if (!form.billing_cycle) {
-      return "Billing cycle is required.";
-    }
-    if (!form.next_renewal_date) {
-      return "Renewal date is required.";
-    }
+    if (!form.service_name.trim()) return "Service name is required.";
+    if (!form.cost || Number(form.cost) <= 0) return "Cost must be greater than 0.";
+    if (!form.billing_cycle) return "Billing cycle is required.";
+    if (!form.next_renewal_date) return "Renewal date is required.";
     return "";
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
     const validationError = validate();
-    if (validationError) {
-      setError(validationError);
-      return;
-    }
-
+    if (validationError) { setError(validationError); return; }
     setError("");
-
     try {
       await onAddSubscription({
         service_name: form.service_name.trim(),
@@ -56,7 +44,7 @@ function SubscriptionForm({ onAddSubscription, isSubmitting }) {
   }
 
   return (
-    <section className="card">
+    <section className="card form-section">
       <h2>Add Subscription</h2>
       <form className="subscription-form" onSubmit={handleSubmit}>
         <label>
@@ -66,12 +54,12 @@ function SubscriptionForm({ onAddSubscription, isSubmitting }) {
             name="service_name"
             value={form.service_name}
             onChange={handleChange}
-            placeholder="Netflix"
+            placeholder="e.g. Netflix, Spotify"
           />
         </label>
 
         <label>
-          Cost
+          Cost (₹)
           <input
             type="number"
             name="cost"
@@ -85,11 +73,7 @@ function SubscriptionForm({ onAddSubscription, isSubmitting }) {
 
         <label>
           Billing Cycle
-          <select
-            name="billing_cycle"
-            value={form.billing_cycle}
-            onChange={handleChange}
-          >
+          <select name="billing_cycle" value={form.billing_cycle} onChange={handleChange}>
             <option value="monthly">Monthly</option>
             <option value="yearly">Yearly</option>
           </select>
@@ -105,11 +89,12 @@ function SubscriptionForm({ onAddSubscription, isSubmitting }) {
           />
         </label>
 
-        {error ? <p className="error-message">{error}</p> : null}
-
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Adding..." : "Add Subscription"}
-        </button>
+        <div className="form-submit-row">
+          <button type="submit" className="btn-primary" disabled={isSubmitting}>
+            {isSubmitting ? "Adding…" : "+ Add Subscription"}
+          </button>
+          {error ? <p className="error-message">{error}</p> : null}
+        </div>
       </form>
     </section>
   );
