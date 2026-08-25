@@ -20,7 +20,7 @@ function ToggleSwitch({ isActive, isToggling, onToggle }) {
   );
 }
 
-function SubscriptionTable({ subscriptions, onToggleStatus, togglingId }) {
+function SubscriptionTable({ subscriptions, onToggleStatus, togglingId, onDeleteSubscription }) {
   return (
     <section className="card">
       <h2>All Subscriptions</h2>
@@ -34,12 +34,13 @@ function SubscriptionTable({ subscriptions, onToggleStatus, togglingId }) {
               <th>Next Renewal</th>
               <th>Monthly Cost</th>
               <th>Status</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
             {subscriptions.length === 0 ? (
               <tr>
-                <td colSpan="6" className="empty-state">
+                <td colSpan="7" className="empty-state">
                   No subscriptions yet.
                 </td>
               </tr>
@@ -78,6 +79,17 @@ function SubscriptionTable({ subscriptions, onToggleStatus, togglingId }) {
                           onToggleStatus(subscription.id, subscription.status)
                         }
                       />
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        className="delete-btn"
+                        onClick={() =>
+                          onDeleteSubscription(subscription.id, subscription.service_name)
+                        }
+                      >
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 );

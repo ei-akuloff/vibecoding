@@ -49,3 +49,15 @@ export function updateSubscriptionStatus(id, status) {
 export function getMetrics() {
   return request("/metrics", { method: "GET" });
 }
+
+export function deleteSubscription(id) {
+  return fetch(`${API_BASE_URL}/subscriptions/${id}`, { method: "DELETE" }).then(
+    (response) => {
+      if (!response.ok) {
+        return response.json().then((payload) => {
+          throw new Error(payload?.detail || `Request failed with status ${response.status}`);
+        });
+      }
+    }
+  );
+}

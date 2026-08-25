@@ -6,6 +6,7 @@ import SubscriptionForm from "./components/SubscriptionForm";
 import SubscriptionTable from "./components/SubscriptionTable";
 import {
   createSubscription,
+  deleteSubscription,
   getMetrics,
   getSubscriptions,
   updateSubscriptionStatus,
@@ -82,6 +83,18 @@ function App() {
     }
   }
 
+  async function handleDeleteSubscription(id, serviceName) {
+    if (!window.confirm(`Delete "${serviceName}"? This cannot be undone.`)) return;
+
+    setError("");
+    try {
+      await deleteSubscription(id);
+      await refreshData();
+    } catch (deleteError) {
+      setError(deleteError.message || "Failed to delete subscription.");
+    }
+  }
+
   async function handleToggleStatus(id, currentStatus) {
     setTogglingId(id);
     setError("");
@@ -118,6 +131,7 @@ function App() {
           subscriptions={subscriptions}
           onToggleStatus={handleToggleStatus}
           togglingId={togglingId}
+          onDeleteSubscription={handleDeleteSubscription}
         />
       )}
     </main>

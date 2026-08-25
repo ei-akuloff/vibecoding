@@ -132,3 +132,17 @@ def update_subscription_status(
     db.refresh(subscription)
 
     return to_subscription_out(subscription)
+
+
+@app.delete("/subscriptions/{id}", status_code=204)
+def delete_subscription(
+    id: int,
+    db: Session = Depends(get_db),
+):
+    subscription = db.query(models.Subscription).filter(models.Subscription.id == id).first()
+
+    if not subscription:
+        raise HTTPException(status_code=404, detail="Subscription not found")
+
+    db.delete(subscription)
+    db.commit()

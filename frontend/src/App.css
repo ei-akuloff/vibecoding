@@ -255,3 +255,19 @@ body {
 .toggle-switch--paused .toggle-switch__label {
   color: #6b7280;
 }
+
+/* ── Delete Button ── */
+.delete-btn {
+  border: 1px solid #fca5a5;
+  border-radius: 6px;
+  padding: 6px 12px;
+  background: #fff;
+  color: #b91c1c;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: #fee2e2;
+}
