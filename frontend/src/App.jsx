@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Header from "./components/Header";
 import MetricsRow from "./components/MetricsRow";
@@ -27,6 +27,7 @@ function App() {
       getSubscriptions(),
       getMetrics(),
     ]);
+
     setSubscriptions(subscriptionsData);
     setMetrics(metricsData);
   }
@@ -37,20 +38,20 @@ function App() {
     async function loadInitialData() {
       setIsLoading(true);
       setError("");
+
       try {
         const [subscriptionsData, metricsData] = await Promise.all([
           getSubscriptions(),
           getMetrics(),
         ]);
-        if (!mounted) {
-          return;
-        }
+
+        if (!mounted) return;
+
         setSubscriptions(subscriptionsData);
         setMetrics(metricsData);
       } catch (loadError) {
-        if (!mounted) {
-          return;
-        }
+        if (!mounted) return;
+
         setError(loadError.message || "Failed to load dashboard data.");
       } finally {
         if (mounted) {
@@ -69,6 +70,7 @@ function App() {
   async function handleAddSubscription(payload) {
     setIsSubmitting(true);
     setError("");
+
     try {
       await createSubscription(payload);
       await refreshData();
@@ -83,6 +85,7 @@ function App() {
   async function handleToggleStatus(id, currentStatus) {
     setTogglingId(id);
     setError("");
+
     const nextStatus = currentStatus === "active" ? "paused" : "active";
 
     try {
@@ -98,12 +101,16 @@ function App() {
   return (
     <main className="app-shell">
       <Header />
+
       <MetricsRow metrics={metrics} />
+
       <SubscriptionForm
         onAddSubscription={handleAddSubscription}
         isSubmitting={isSubmitting}
       />
+
       {error ? <p className="error-banner">{error}</p> : null}
+
       {isLoading ? (
         <section className="card">Loading subscriptions...</section>
       ) : (

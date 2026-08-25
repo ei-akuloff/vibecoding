@@ -1,3 +1,5 @@
+import React from "react";
+
 function MetricsRow({ metrics }) {
   const monthlyBurn = Number(metrics?.total_monthly_burn || 0);
   const alerts = Number(metrics?.upcoming_renewals_alert_count || 0);

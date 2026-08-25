@@ -1,3 +1,4 @@
+import React from "react";
 function SubscriptionTable({ subscriptions, onToggleStatus, togglingId }) {
   return (
     <section className="card">
