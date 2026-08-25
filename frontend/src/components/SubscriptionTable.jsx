@@ -1,8 +1,29 @@
 import React from "react";
+
+function ToggleSwitch({ isActive, isToggling, onToggle }) {
+  return (
+    <button
+      type="button"
+      className={`toggle-switch ${isActive ? "toggle-switch--active" : "toggle-switch--paused"}`}
+      onClick={onToggle}
+      disabled={isToggling}
+      aria-label={isActive ? "Set Paused" : "Set Active"}
+      title={isActive ? "Click to pause" : "Click to activate"}
+    >
+      <span className="toggle-switch__track">
+        <span className="toggle-switch__thumb" />
+      </span>
+      <span className="toggle-switch__label">
+        {isToggling ? "..." : isActive ? "Active" : "Paused"}
+      </span>
+    </button>
+  );
+}
+
 function SubscriptionTable({ subscriptions, onToggleStatus, togglingId }) {
   return (
     <section className="card">
-      <h2>Active Subscriptions</h2>
+      <h2>All Subscriptions</h2>
       <div className="table-wrap">
         <table className="subscriptions-table">
           <thead>
@@ -13,13 +34,12 @@ function SubscriptionTable({ subscriptions, onToggleStatus, togglingId }) {
               <th>Next Renewal</th>
               <th>Monthly Cost</th>
               <th>Status</th>
-              <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {subscriptions.length === 0 ? (
               <tr>
-                <td colSpan="7" className="empty-state">
+                <td colSpan="6" className="empty-state">
                   No subscriptions yet.
                 </td>
               </tr>
@@ -50,22 +70,14 @@ function SubscriptionTable({ subscriptions, onToggleStatus, togglingId }) {
                       </div>
                     </td>
                     <td>Rs {Number(subscription.monthly_cost).toFixed(2)}</td>
-                    <td className="capitalize">{subscription.status}</td>
                     <td>
-                      <button
-                        type="button"
-                        className={`toggle-btn ${isPaused ? "paused" : "active"}`}
-                        onClick={() =>
+                      <ToggleSwitch
+                        isActive={!isPaused}
+                        isToggling={isToggling}
+                        onToggle={() =>
                           onToggleStatus(subscription.id, subscription.status)
                         }
-                        disabled={isToggling}
-                      >
-                        {isToggling
-                          ? "Saving..."
-                          : isPaused
-                            ? "Set Active"
-                            : "Set Paused"}
-                      </button>
+                      />
                     </td>
                   </tr>
                 );

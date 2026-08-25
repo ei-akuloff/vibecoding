@@ -59,16 +59,14 @@ def calculate_metrics(subscriptions: list[models.Subscription]) -> schemas.Metri
     upcoming_renewals_alert_count = 0
 
     for subscription in subscriptions:
-        if subscription.status != "active":
-            continue
-
-        monthly_cost = subscription.cost
-        if subscription.billing_cycle == "yearly":
-            monthly_cost = subscription.cost / 12
-
-        total_monthly_burn += monthly_cost
-
         days_until_renewal = (subscription.next_renewal_date - date.today()).days
+
+        if subscription.status == "active":
+            monthly_cost = subscription.cost
+            if subscription.billing_cycle == "yearly":
+                monthly_cost = subscription.cost / 12
+            total_monthly_burn += monthly_cost
+
         if 0 <= days_until_renewal <= 7:
             upcoming_renewals_alert_count += 1
 
